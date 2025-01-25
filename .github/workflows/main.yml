@@ -17,5 +17,7 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_PI }}
+    - name: Debug SSH connection
+      run: ssh -v apierson3@192.168.86.27 "echo 'SSH connection successful'"
     - name: Copy Python script to Raspberry Pi
       run: scp -r / apierson3@192.168.86.27:/home/apierson3/Documents/testcicd
