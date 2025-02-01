@@ -1,0 +1,7 @@
+# requirements.txt
+# List your Python dependencies here, one per line.
+# For example:
+# pandas==1.3.3
+# sqlalchemy==1.4.22
+
+# This file is currently blank. Add your dependencies as needed.
