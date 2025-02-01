@@ -26,3 +26,15 @@ jobs:
        context: .
        push: true
        tags: apierson3/howagileairflow:latest
+
+    - name: Deploy to Raspberry Pi
+      uses: appleboy/ssh-action@v0.1.1
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USERNAME }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        script: |
+          docker pull apierson3/howagileairflow:latest
+          docker stop howagile_airflow_container || true
+          docker rm howagile_airflow_container || true
+          docker run -d --name howagile_airflow_container -p 80:80 apierson3/githubaction:latest
