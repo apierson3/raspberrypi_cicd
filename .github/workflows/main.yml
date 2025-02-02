@@ -48,9 +48,27 @@ jobs:
         username: ${{ secrets.DEPLOY_USERNAME }}
         password: ${{ secrets.DEPLOY_PASSWORD }}
         script: |
+          # Increase swap memory
+          sudo fallocate -l 1G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+
+          # Pull the latest image
           docker pull apierson3/howagileairflow:latest
+          
+          # Stop and remove existing container if it exists
           docker stop howagile_airflow_container || true
           docker rm howagile_airflow_container || true
-          docker run -it --name init_airflow --entrypoint /bin/bash apierson3/howagileairflow:latest
+
+          # Start the Airflow container in interactive mode and initialize the database
+          docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
+          docker exec init_airflow airflow db init
+
+          # Stop and remove the initialization container
+          docker stop init_airflow
+          docker rm init_airflow
+
+          # Run the Airflow container
           docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest
-          docker exec howagile_airflow_container airflow db init
