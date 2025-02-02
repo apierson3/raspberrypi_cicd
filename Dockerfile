@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY init_airflow.sh /usr/local/bin/init_airflow.sh
 
 # Make the script executable
-RUN chmod +x /usr/local/bin/init_airflow.sh
+RUN chmod +x /init_airflow.sh
 
 # Expose necessary ports (default: 8080)
 EXPOSE 8080
