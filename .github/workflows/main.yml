@@ -62,6 +62,10 @@ jobs:
           docker ps -a | grep howagile_airflow_container && docker stop howagile_airflow_container || true
           docker ps -a | grep howagile_airflow_container && docker rm howagile_airflow_container || true
 
+          # Stop and remove the init_airflow container if it exists
+          docker ps -a | grep init_airflow && docker stop init_airflow || true
+          docker ps -a | grep init_airflow && docker rm init_airflow || true
+
           # Start the Airflow container in interactive mode and initialize the database
           docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
           
