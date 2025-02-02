@@ -58,13 +58,13 @@ jobs:
           # Pull the latest image
           docker pull apierson3/howagileairflow:latest
           
-          # Stop and remove existing container if it exists
-          docker stop howagile_airflow_container || true
-          docker rm howagile_airflow_container || true
+          # Stop and remove the container if it exists
+          docker ps -a | grep howagile_airflow_container && docker stop howagile_airflow_container || true
+          docker ps -a | grep howagile_airflow_container && docker rm howagile_airflow_container || true
 
           # Start the Airflow container in interactive mode and initialize the database
           docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
-
+          
           # Wait for the container to be fully started
           sleep 10
 
@@ -81,5 +81,5 @@ jobs:
           docker stop init_airflow
           docker rm init_airflow
 
-          # Run the Airflow
-          docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest          
+          # Run the Airflow container
+          docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest
