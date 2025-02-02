@@ -20,4 +20,4 @@ RUN chmod +x /usr/local/bin/init_airflow.sh
 EXPOSE 8080
 
 # Set the entrypoint to use the initialization script
-ENTRYPOINT ["/usr/local/bin/init_airflow.sh"]
+ENTRYPOINT ["/init_airflow.sh"]
