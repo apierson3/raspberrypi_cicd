@@ -51,4 +51,4 @@ jobs:
           docker pull apierson3/howagileairflow:latest
           docker stop howagile_airflow_container || true
           docker rm howagile_airflow_container || true
-          docker run -d --name howagile_airflow_container -p 80:80 apierson3/githubaction:latest
+          docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/githubaction:latest
