@@ -64,11 +64,19 @@ jobs:
 
           # Start the Airflow container in interactive mode and initialize the database
           docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
-          docker exec init_airflow airflow db init
+          
+          # Check if the container is running
+          if docker ps | grep -q init_airflow; then
+            # Initialize the database
+            docker exec init_airflow airflow db init
+          
+            # Stop and remove the initialization container
+            docker stop init_airflow
+            docker rm init_airflow
 
-          # Stop and remove the initialization container
-          docker stop init_airflow
-          docker rm init_airflow
-
-          # Run the Airflow container
-          docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest
+            # Run the Airflow container
+            docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest
+          else
+            echo "Failed to start init_airflow container"
+            exit 1
+          fi
