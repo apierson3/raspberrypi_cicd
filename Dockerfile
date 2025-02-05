@@ -13,6 +13,9 @@ RUN pip install -r requirements.txt
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /usr/local/airflow/entrypoint.sh
 
+# Change the ownership of the entrypoint script
+RUN chown airflow:airflow /usr/local/airflow/entrypoint.sh
+
 # Make the entrypoint script executable
 RUN chmod +x /usr/local/airflow/entrypoint.sh
 
