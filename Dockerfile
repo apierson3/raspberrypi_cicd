@@ -10,6 +10,9 @@ COPY requirements.txt .
 # Install the dependencies from the requirements file
 RUN pip install -r requirements.txt
 
+# Create the airflow user and group
+RUN groupadd -r airflow && useradd -r -g airflow airflow
+
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /usr/local/airflow/entrypoint.sh
 
