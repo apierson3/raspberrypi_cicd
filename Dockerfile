@@ -14,13 +14,10 @@ RUN pip install -r requirements.txt
 RUN groupadd -r airflow && useradd -r -g airflow airflow
 
 # Copy the entrypoint script into the container
-COPY entrypoint.sh /usr/local/airflow/entrypoint.sh
-
-# Change the ownership of the entrypoint script
-RUN chown airflow:airflow /usr/local/airflow/entrypoint.sh
+COPY --chmod=755 entrypoint.sh /usr/local/airflow/entrypoint.sh
 
 # Make the entrypoint script executable
-RUN chmod +x /usr/local/airflow/entrypoint.sh
+# RUN chmod +x /usr/local/airflow/entrypoint.sh
 
 # Set the entrypoint script as the default command
 ENTRYPOINT ["/usr/local/airflow/entrypoint.sh"]
