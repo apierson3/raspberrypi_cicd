@@ -11,7 +11,7 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Create the airflow user and group
-RUN groupadd -r airflow && useradd -r -g airflow airflow
+# RUN groupadd -r airflow && useradd -r -g airflow airflow
 
 # Copy the entrypoint script into the container
 COPY --chmod=755 entrypoint.sh /usr/local/airflow/entrypoint.sh
