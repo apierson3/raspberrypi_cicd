@@ -11,10 +11,10 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy the entrypoint script into the container
-COPY entrypoint.sh .
+COPY entrypoint.sh /usr/local/airflow/entrypoint.sh
 
 # Make the entrypoint script executable
-RUN chmod +x entrypoint.sh
+RUN chmod +x /usr/local/airflow/entrypoint.sh
 
 # Set the entrypoint script as the default command
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/usr/local/airflow/entrypoint.sh"]
