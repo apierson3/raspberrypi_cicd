@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # initialize the database
-airflow initdb
+airflow db init
 
 # Create an admin user if it doesn't already exist
 airflow users create \
