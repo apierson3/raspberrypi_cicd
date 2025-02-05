@@ -2,7 +2,7 @@
 FROM apache/airflow:2.10.4
 
 # Set the working directory
-WORKDIR /usr/local/airflow
+WORKDIR /
 
 # Copy the requirements file into the container
 COPY requirements.txt .
