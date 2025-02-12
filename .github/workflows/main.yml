@@ -57,7 +57,7 @@ jobs:
           docker rm howagile_airflow_container
 
           # Start the Airflow container in interactive mode and initialize the database
-          docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
+          #docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
 
           # Run the Airflow container
-          docker run -d --platform linux/arm64 --name howagile_airflow_container -p 80:80 apierson3/howagileairflow:latest
+          docker-compose up apierson3/howagileairflow:latest
