@@ -60,4 +60,4 @@ jobs:
           #docker run --name init_airflow --entrypoint "/bin/bash" -d apierson3/howagileairflow:latest
 
           # Run the Airflow container
-          docker-compose up apierson3/howagileairflow:latest
+          docker compose up apierson3/howagileairflow:latest
