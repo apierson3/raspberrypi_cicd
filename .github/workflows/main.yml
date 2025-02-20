@@ -47,8 +47,8 @@ jobs:
         host: ${{ secrets.DEPLOY_HOST }}  # Raspberry Pi IP address
         username: ${{ secrets.DEPLOY_USERNAME }} # Raspberry Pi username
         password: ${{ secrets.DEPLOY_PASSWORD }}  # Raspberry Pi SSH key
-        source: ./*  # Source directory (current directory)
-        target: /home/apierson3/Desktop/how-agile-airflow # Target directory on Raspberry Pi
+        source: "./*"  # Source directory (current directory)
+        target: "/home/apierson3/Desktop/how-agile-airflow" # Target directory on Raspberry Pi
 
 
     # - name: Deploy to Raspberry Pi
