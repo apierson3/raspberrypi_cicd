@@ -41,16 +41,26 @@ jobs:
     #    platforms: linux/amd64,linux/arm64
     #    tags: apierson3/howagileairflow:latest
 
-    - name: Deploy to Raspberry Pi
-      uses: appleboy/ssh-action@v0.1.1
+    - name: Copy files to Raspberry Pi
+      uses: appleboy/scp-action@v0.1.0
       with:
-        host: ${{ secrets.DEPLOY_HOST }}
-        username: ${{ secrets.DEPLOY_USERNAME }}
-        password: ${{ secrets.DEPLOY_PASSWORD }}
-        script: |
+        host: ${{ secrets.DEPLOY_HOST }}  # Raspberry Pi IP address
+        username: ${{ secrets.DEPLOY_USERNAME }} # Raspberry Pi username
+        password: ${{ secrets.DEPLOY_PASSWORD }}  # Raspberry Pi SSH key
+        source: ./*  # Source directory (current directory)
+        target: /home/apierson3/Desktop/how-agile-airflow # Target directory on Raspberry Pi
+
+
+    # - name: Deploy to Raspberry Pi
+    #   uses: appleboy/ssh-action@v0.1.1
+    #   with:
+    #     host: ${{ secrets.DEPLOY_HOST }}
+    #     username: ${{ secrets.DEPLOY_USERNAME }}
+    #     password: ${{ secrets.DEPLOY_PASSWORD }}
+    #     script: |
 
           # Copy to Pi
-          scp -r /home/runner/work/raspberrypi_cicd/raspberrypi_cicd/* ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/apierson3/Desktop/how-agile-airflow
+          #scp -r /home/runner/work/raspberrypi_cicd/raspberrypi_cicd/* ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/apierson3/Desktop/how-agile-airflow
 
 
           # Run Airflow docker compose
