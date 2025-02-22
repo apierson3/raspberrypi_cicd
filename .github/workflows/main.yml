@@ -57,12 +57,13 @@ jobs:
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.DEPLOY_USERNAME }}
-        key: ${{ secrets.DEPLOY_PRIV_KEY }}  # Raspberry Pi SSH key
         password: ${{ secrets.DEPLOY_PASSWORD }}
         script: |
           cd ~/Desktop/how-agile-airflow/
           rm -rf raspberrypi_cicd
           git clone https://github.com/apierson3/raspberrypi_cicd.git
+        timeout: 600
+        command_timeout: 300
 
 
         # Copy to Pi
