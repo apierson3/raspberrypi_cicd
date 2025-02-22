@@ -1,0 +1,1 @@
+This is a placeholder to add a folder to the project directory
