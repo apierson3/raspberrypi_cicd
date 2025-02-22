@@ -57,6 +57,7 @@ jobs:
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.DEPLOY_USERNAME }}
+        key: ${{ secrets.DEPLOY_PRIV_KEY }}  # Raspberry Pi SSH key
         password: ${{ secrets.DEPLOY_PASSWORD }}
         script: |
           cd ~/Desktop/how-agile-airflow/
