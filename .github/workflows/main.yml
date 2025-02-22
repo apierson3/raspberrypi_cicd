@@ -53,7 +53,7 @@ jobs:
 
     # test  
     - name: Deploy to Raspberry Pi
-      uses: appleboy/ssh-action@v0.1.1
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.DEPLOY_HOST }}
         username: ${{ secrets.DEPLOY_USERNAME }}
