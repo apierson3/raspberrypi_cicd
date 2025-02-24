@@ -66,7 +66,7 @@ jobs:
         command_timeout: 300s
 
 
-        # Copy to Pi
+        # Copy to Pi 
         #scp -r /home/runner/work/raspberrypi_cicd/raspberrypi_cicd/* ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/apierson3/Desktop/how-agile-airflow
 
 
