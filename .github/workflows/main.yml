@@ -29,6 +29,7 @@ jobs:
           cd ~/Desktop/how-agile-airflow/
           rm -rf raspberrypi_cicd
           git clone https://github.com/apierson3/raspberrypi_cicd.git
+          sysctl vm.overcommit_memory=1
 
           docker compose up
 
