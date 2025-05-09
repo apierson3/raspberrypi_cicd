@@ -25,6 +25,13 @@ jobs:
         script: |
           cd ~/Desktop/how-agile-airflow/
           docker compose down
+        
+          cd ~/Desktop/how-agile-airflow/
+          rm -rf raspberrypi_cicd
+          git clone https://github.com/apierson3/raspberrypi_cicd.git
+          sysctl vm.overcommit_memory=1
+
+          docker compose up
 
         timeout: 600s
         command_timeout: 300s
