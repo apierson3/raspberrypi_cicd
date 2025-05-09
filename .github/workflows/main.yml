@@ -23,7 +23,8 @@ jobs:
         username: ${{ secrets.DEPLOY_USERNAME }}
         password: ${{ secrets.DEPLOY_PASSWORD }}
         script: |
-          ls -a
+          cd ~/Desktop/how-agile-airflow/
+          docker compose down
 
         timeout: 600s
         command_timeout: 300s
