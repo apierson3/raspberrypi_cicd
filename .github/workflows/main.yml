@@ -1,30 +1,38 @@
 name: Build and push Docker image to Docker Hub
+
 on:
   push:
     branches: [ "main" ]
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
+    - name: Check out the repo
+      uses: actions/checkout@v4
 
-      # Deploy and run RaspberryPi docker airflow
-      - name: Deploy to Raspberry Pi
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          script: |
-            cd ~/Desktop/how-agile-airflow/
-            docker compose down
 
-            cd ~/Desktop/how-agile-airflow/
-            rm -rf raspberrypi_cicd
-            git clone https://github.com/apierson3/raspberrypi_cicd.git
-            sysctl vm.overcommit_memory=1
+    # Deploy and run RaspberryPi docker airflow
+    - name: Deploy to Raspberry Pi
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.DEPLOY_HOST }}
+        username: ${{ secrets.DEPLOY_USERNAME }}
+        password: ${{ secrets.DEPLOY_PASSWORD }}
+        script: |
+          cd ~/Desktop/how-agile-airflow/
+          docker compose down
+        
+          cd ~/Desktop/how-agile-airflow/
+          rm -rf raspberrypi_cicd
+          git clone https://github.com/apierson3/raspberrypi_cicd.git
+          sysctl vm.overcommit_memory=1
 
-            cd raspberrypi_cicd/
-            docker compose up -d # Run in detached mode
+          cd cdraspberrypi_cicd/
+          docker compose up -d #run in detached mode
+
+        timeout: 600s
+        command_timeout: 300s
