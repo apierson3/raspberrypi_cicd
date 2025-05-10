@@ -24,7 +24,8 @@ jobs:
         password: ${{ secrets.DEPLOY_PASSWORD }}
         script: |
           cd ~/Desktop/how-agile-airflow/
-          docker compose down
+          docker compose down -v 
+          sleep 60s
         
           cd ~/Desktop/how-agile-airflow/
           rm -rf raspberrypi_cicd
@@ -32,7 +33,7 @@ jobs:
           sysctl vm.overcommit_memory=1
 
           cd cdraspberrypi_cicd/
-          docker compose up -d #run in detached mode
+          docker compose up -d 
 
         timeout: 600s
         command_timeout: 300s
