@@ -31,6 +31,7 @@ jobs:
           git clone https://github.com/apierson3/raspberrypi_cicd.git
           sysctl vm.overcommit_memory=1
 
+          cd raspberrypi_cicd/
           docker compose up
 
         timeout: 600s
