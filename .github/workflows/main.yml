@@ -28,38 +28,3 @@ jobs:
 
             cd raspberrypi_cicd/
             docker compose up -d # Run in detached mode
-
-      - name: Wait for Airflow Webserver to start health checks
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          script: |
-            TIMEOUT=120 # Timeout in seconds
-            START_TIME=$(date +%s)
-            while true; do
-              STARTED_SERVICES=$(docker compose ps --services --filter "health=started")
-              echo "Started services: $STARTED_SERVICES"
-              if [[ "$STARTED_SERVICES" =~ "airflow-webserver" ]]; then
-                echo "Airflow Webserver health check started."
-                break
-              fi
-              CURRENT_TIME=$(date +%s)
-              ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
-              if [[ "$ELAPSED_TIME" -gt "$TIMEOUT" ]]; then
-                echo "Timeout waiting for Airflow Webserver health check to start."
-                exit 1
-              fi
-              sleep 5
-            done
-
-      - name: Run your tests or next commands
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          password: ${{ secrets.DEPLOY_PASSWORD }}
-          script: |
-            echo "Airflow is likely running. You can now execute further commands."
-            # Add your test commands or other deployment steps here
