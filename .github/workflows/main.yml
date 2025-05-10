@@ -1,5 +1,4 @@
 name: Build and push Docker image to Docker Hub
-
 on:
   push:
     branches: [ "main" ]
@@ -64,6 +63,3 @@ jobs:
           script: |
             echo "Airflow is likely running. You can now execute further commands."
             # Add your test commands or other deployment steps here
-
-      timeout: 600s
-      command_timeout: 300s
