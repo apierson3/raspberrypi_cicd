@@ -74,10 +74,10 @@ x-airflow-common:
     # If you want to use it, outcomment it and replace airflow.cfg with the name of your config file
     # AIRFLOW_CONFIG: '/opt/airflow/config/airflow.cfg'
   volumes:
-    - ${AIRFLOW_PROJ_DIR:-.}/dags:~/Desktop/how-agile-airflow/raspberrypi_cicd/dags
-    - ${AIRFLOW_PROJ_DIR:-.}/logs:~/Desktop/how-agile-airflow/raspberrypi_cicd/logs
-    - ${AIRFLOW_PROJ_DIR:-.}/config:~/Desktop/how-agile-airflow/raspberrypi_cicd/config
-    - ${AIRFLOW_PROJ_DIR:-.}/plugins:~/Desktop/how-agile-airflow/raspberrypi_cicd/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/dags:/home/apierson3/Desktop/how-agile-airflow/raspberrypi_cicd/dags
+    - ${AIRFLOW_PROJ_DIR:-.}/logs:/home/apierson3/Desktop/how-agile-airflow/raspberrypi_cicd/logs
+    - ${AIRFLOW_PROJ_DIR:-.}/config:/home/apierson3/Desktop/how-agile-airflow/raspberrypi_cicd/config
+    - ${AIRFLOW_PROJ_DIR:-.}/plugins:/home/apierson3/Desktop/how-agile-airflow/raspberrypi_cicd/plugins
   user: "${AIRFLOW_UID:-1000}:0"
   depends_on:
     &airflow-common-depends-on
