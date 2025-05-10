@@ -26,6 +26,8 @@ jobs:
           cd ~/Desktop/how-agile-airflow/
           docker compose down -v 
           sleep 60s
+
+          sudo fuser -k 8080/tcp
         
           cd ~/Desktop/how-agile-airflow/
           rm -rf raspberrypi_cicd
